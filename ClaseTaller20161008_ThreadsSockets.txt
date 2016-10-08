@@ -1,0 +1,42 @@
+** Threads **
+
+-Hilos de proceso: mecanismo para ejecutar tareas en 'parelelo' (en realidad, el procesador ejecuta una instrucción a la vez. Planificador de tareas, se va ejecutando un pedacito de cada tarea).
+Permite ejecutar tareas en forma simultánea.
+JVM es un sistema multihilo, permite la simultaneidad de procesos. Los threads de Java corren en la JVM. El proceso de JVM es a su vez un hilo del SO.
+El planificador de tareas asigna prioridades de valor entero. Cuanto más alto sea, se ejecuta primero.
+Se independizan los procesos.
+Si el programa principal muere, los threads también.
+Cuando los threads intenta acceder a memoria compartida al mismo tiempo (por ejemplo una clase o archivo) se pueden bloquear o no ver la información actualizada.
+Se soluciona con semáforos, señales o Sincronizer.
+
+-Estados de un thread:
+	. Creación del thread. No está en ejecucuón.
+	. Ejecución del thread.
+	. Pausado. No significa que está terminado, puede estar pausado. Puede volver solamente al estado de ejecución.
+	. Parado. Terminó de ejecutar el método Run (de la clase Thread).
+	
+Ejemplo: Creado --> START --> Ejecución --> RUN --> Pausado --> Ejecución --> Parado.
+
+-Para crear un thread, se crea una clase que herede de la clase Thread. Sobreescribir el método Run.
+-Para que el thread muera, se debe terminar de ejecutar el método Run.
+-Sincronizer: no va en el Run, va en el método que accede a memoria compartida.
+
+
+
+
+
+** Sockets **
+
+-Socket: programa que permite conectar dos procesos sobre una red.
+Se crea un socket en un extremo, otro socket en el otro extremo, y se vinculan a través de una red.
+
+SERVIDOR:
+	Preparar el server --> Escucha de peticiones de conexión al server --> Conexión establecida --> envío y recepción de mensajes --> Cierre de la conexión.
+	ServerSocket --> Seteo de puerto --> accept() (es bloqueante, hasta que no escuche, no sigue con lo demás)
+	Se setea un puerto, que va a estar escuchando las peticiones de los clientes.
+	El accept del server le devuelve al mismo un objeto socket que está vinculado con el socket del cliente.
+	Se intercambian mensajes bidireccionalmente.
+	Se termina la conexión con Socket.close().
+CLIENTE:
+	Se instancia un objeto Socket para conectarse al server, se necesita la IP del server, y el puerto en el cual el mismo está escuchando.
+	El accept del server le devuelve al mismo un objeto socket que está vinculado con el socket del cliente.
